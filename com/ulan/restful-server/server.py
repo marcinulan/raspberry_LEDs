@@ -8,7 +8,6 @@ from lib import rainbow
 
 app = Flask(__name__)
 api = Api(app)
-app.run(host= '192.168.1.31')
 
 glowing = 0
 flashing = 0
@@ -25,6 +24,7 @@ class FlashRed(Resource):
         flashred.redflash()
         return 200
 
+
 class Rainbow(Resource):
     def get(selfself):
         rainbow.rainbow()
@@ -36,4 +36,4 @@ api.add_resource(FlashRed, '/FlashRed')
 api.add_resource(Rainbow, '/Rainbow')
 
 if __name__ == '__main__':
-    app.run(port='5002')
+    app.run(host='0.0.0.0', port='5002')
