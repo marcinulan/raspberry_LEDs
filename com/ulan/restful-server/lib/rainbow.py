@@ -1,7 +1,6 @@
 import random
 import time
 import pigpio
-from flask_sqlalchemy import xrange
 
 
 def rainbow():
