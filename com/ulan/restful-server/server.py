@@ -8,6 +8,7 @@ from lib import rainbow
 
 app = Flask(__name__)
 api = Api(app)
+app.run(host= '192.168.1.31')
 
 glowing = 0
 flashing = 0
