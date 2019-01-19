@@ -4,44 +4,71 @@ from lib import glowgreen
 from lib import flashred
 from lib import rainbow
 from lib import daylight
-
-# from lib import flash-red
+from lib import blinkgreen
 
 app = Flask(__name__)
 api = Api(app)
 
 glowing = 0
 flashing = 0
+error_message = '404 - Raspberry Pi not found'
 
 
 class GlowGreen(Resource):
-    def get(self):
-        glowgreen.greenglow()
-        return 200
+    @staticmethod
+    def get():
+        try:
+            glowgreen.greenglow()
+            return 200
+        except AttributeError:
+            return error_message
 
 
 class FlashRed(Resource):
-    def get(self):
-        flashred.redflash()
-        return 200
+    @staticmethod
+    def get():
+        try:
+            flashred.redflash()
+            return 200
+        except AttributeError:
+            return error_message
 
 
 class Rainbow(Resource):
-    def get(self):
-        rainbow.rainbow()
-        return 200
+    @staticmethod
+    def get():
+        try:
+            rainbow.rainbow()
+            return 200
+        except AttributeError:
+            return error_message
 
 
 class Daylight(Resource):
-    def get(self):
-        daylight.switch_lights()
-        return 200
+    @staticmethod
+    def get():
+        try:
+            daylight.switch_lights()
+            return 200
+        except AttributeError:
+            return error_message
+
+
+class Notifier(Resource):
+    @staticmethod
+    def get():
+        try:
+            blinkgreen.blink()
+            return 200
+        except AttributeError:
+            return error_message
 
 
 api.add_resource(GlowGreen, '/GlowGreen')
 api.add_resource(FlashRed, '/FlashRed')
 api.add_resource(Rainbow, '/Rainbow')
 api.add_resource(Daylight, '/SwitchLights')
+api.add_resource(Notifier, '/Notify')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5002')
+    app.run('0.0.0.0', '5002')
