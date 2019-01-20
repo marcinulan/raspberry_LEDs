@@ -5,6 +5,9 @@ from lib import flashred
 from lib import rainbow
 from lib import daylight
 from lib import blinkgreen
+from lib import greenlight
+from lib import redlight
+from lib import bluelight
 
 app = Flask(__name__)
 api = Api(app)
@@ -64,11 +67,45 @@ class Notifier(Resource):
             return error_message
 
 
+class GreenLight(Resource):
+    @staticmethod
+    def get():
+        try:
+            greenlight.switch_lights()
+            return 200
+        except AttributeError:
+            return error_message
+
+
+class RedLight(Resource):
+    @staticmethod
+    def get():
+        try:
+            redlight.switch_lights()
+            return 200
+        except AttributeError:
+            return error_message
+
+
+class BlueLight(Resource):
+    @staticmethod
+    def get():
+        try:
+            bluelight.switch_lights()
+            return 200
+        except AttributeError:
+            return error_message
+
+
+
 api.add_resource(GlowGreen, '/GlowGreen')
 api.add_resource(FlashRed, '/FlashRed')
 api.add_resource(Rainbow, '/Rainbow')
 api.add_resource(Daylight, '/SwitchLights')
 api.add_resource(Notifier, '/Notify')
+api.add_resource(GreenLight, '/Green')
+api.add_resource(RedLight, '/Red')
+api.add_resource(BlueLight, '/Blue')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', '5002')
