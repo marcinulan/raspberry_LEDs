@@ -97,7 +97,6 @@ class BlueLight(Resource):
             return error_message
 
 
-
 api.add_resource(GlowGreen, '/GlowGreen')
 api.add_resource(FlashRed, '/FlashRed')
 api.add_resource(Rainbow, '/Rainbow')
@@ -108,4 +107,4 @@ api.add_resource(RedLight, '/Red')
 api.add_resource(BlueLight, '/Blue')
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', '5002')
+    app.run('0.0.0.0', '5003')
