@@ -65,3 +65,5 @@ def switch_lights():
         switch_off()
     else:
         switch_on()
+
+    pi.stop()

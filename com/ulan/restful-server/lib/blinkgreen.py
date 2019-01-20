@@ -29,3 +29,4 @@ def blink():
 
     pik()
     pik()
+    pi.stop()
