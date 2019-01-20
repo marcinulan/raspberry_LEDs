@@ -9,15 +9,8 @@ def switch_lights():
     pi = pigpio.pi('192.168.1.31')
 
     def get_brightness():
-        brightness_red = pi.get_PWM_dutycycle(red_pin)
-        brightness_green = pi.get_PWM_dutycycle(green_pin)
         brightness_blue = pi.get_PWM_dutycycle(blue_pin)
-        return brightness_blue, brightness_green, brightness_red
-
-    def get_lights():
-        brightness_blue, brightness_green, brightness_red = get_brightness()
-        brightness = (brightness_red + brightness_green + brightness_blue)
-        return brightness
+        return brightness_blue
 
     def switch_on():
         pi.set_PWM_dutycycle(red_pin, 0)
@@ -29,12 +22,12 @@ def switch_lights():
         pi.set_PWM_dutycycle(blue_pin, 0)
         pi.set_PWM_dutycycle(green_pin, 0)
 
-    if get_lights() > 100:
+    if get_brightness() > 100:
         is_light = 1
-        print("{} and {}".format(get_lights(), is_light))
+        print("{} and {}".format(get_brightness(), is_light))
     else:
         is_light = 0
-        print("{} and {}".format(get_lights(), is_light))
+        print("{} and {}".format(get_brightness(), is_light))
 
     if is_light:
         switch_off()
