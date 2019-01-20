@@ -29,10 +29,7 @@ def switch_lights():
         is_light = 0
 
     def switch_off():
-        print('test1')
-        time.sleep(1)
         b, g, r = get_brightness()
-        print(r, g, b)
         while b > 0:
             b -= 1
             pi.set_PWM_dutycycle(blue_pin, b)
