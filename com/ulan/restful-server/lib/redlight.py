@@ -19,6 +19,24 @@ def switch_lights():
         brightness = (brightness_red + brightness_green + brightness_blue)
         return brightness
 
-    pi.set_PWM_dutycycle(red_pin, get_lights())
-    pi.set_PWM_dutycycle(blue_pin, 0)
-    pi.set_PWM_dutycycle(green_pin, 0)
+    def switch_on():
+        pi.set_PWM_dutycycle(red_pin, 250)
+        pi.set_PWM_dutycycle(blue_pin, 0)
+        pi.set_PWM_dutycycle(green_pin, 0)
+
+    def switch_off():
+        pi.set_PWM_dutycycle(red_pin, 0)
+        pi.set_PWM_dutycycle(blue_pin, 0)
+        pi.set_PWM_dutycycle(green_pin, 0)
+
+    if get_lights() > 100:
+        is_light = 1
+        print("{} and {}".format(get_lights(), is_light))
+    else:
+        is_light = 0
+        print("{} and {}".format(get_lights(), is_light))
+
+    if is_light:
+        switch_off()
+    else:
+        switch_on()
