@@ -12,7 +12,7 @@ def rainbow():
     default_sleep = 0.01
     start_time = time.time()
 
-    pi = pigpio.pi('192.168.1.31')
+    pi = pigpio.pi()
 
     def reset_light():
         pi.set_PWM_dutycycle(red_pin, 0)
@@ -63,8 +63,7 @@ def rainbow():
             pi.set_PWM_dutycycle(blue_pin, brightness)
 
     while current_time - start_time < 15:
-        blink2()
-        blink2()
+        blink()
         blink2()
         current_time = time.time()
         time.sleep(default_sleep)

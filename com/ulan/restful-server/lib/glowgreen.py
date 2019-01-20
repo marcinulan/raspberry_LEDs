@@ -3,35 +3,27 @@ import pigpio
 
 
 def greenglow():
-    # The Pins. Use Broadcom numbers.
-    RED_PIN = 17
-    GREEN_PIN = 22
-    BLUE_PIN = 24
+    green_pin = 22
+    default_sleep = 0.00005
+    start_time = time.time()
 
-    # Number of color changes per step (more is faster, less is slower).
-    # You also can use 0.X floats.
-    STEPS = 1
-    default_sleep = 0.0005
-    startTime = time.time()
+    pi = pigpio.pi()
 
-    pi = pigpio.pi('192.168.1.31')
-
-    PIN = GREEN_PIN
-    BRIGHTNESS = 0.0
+    brightness = 0.0
 
     while True:
-        while BRIGHTNESS < 220:
-            BRIGHTNESS += 1
-            pi.set_PWM_dutycycle(GREEN_PIN, BRIGHTNESS)
+        while brightness < 220:
+            brightness += 1
+            pi.set_PWM_dutycycle(green_pin, brightness)
             time.sleep(default_sleep)
 
-        while BRIGHTNESS > 0:
-            BRIGHTNESS -= 1
-            pi.set_PWM_dutycycle(GREEN_PIN, BRIGHTNESS)
+        while brightness > 0:
+            brightness -= 1
+            pi.set_PWM_dutycycle(green_pin, brightness)
             time.sleep(default_sleep)
 
-        currentTime = time.time()
-        if (currentTime - startTime) > 10:
+        current_time = time.time()
+        if (current_time - start_time) > 10:
             break
 
     pi.stop()

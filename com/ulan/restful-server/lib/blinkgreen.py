@@ -10,14 +10,12 @@ def blink():
 
     default_sleep = 0.09
 
-    pi = pigpio.pi('192.168.1.31')
+    pi = pigpio.pi()
 
 # try:
     r = pi.get_PWM_dutycycle(red_pin)
     g = pi.get_PWM_dutycycle(green_pin)
     b = pi.get_PWM_dutycycle(blue_pin)
-    # except ValueError:
-    #     print('totally expected')
 
     def pik():
         pi.set_PWM_dutycycle(red_pin, 0)
