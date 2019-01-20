@@ -78,17 +78,17 @@ def rainbow():
 
     def blink3():
         reset_light()
-        increaseColor(red_pin, 100)
+        increaseColor(red_pin, 222)
         increaseColor(green_pin, 100)
-        decreaseColor(red_pin, 40)
+        decreaseColor(red_pin, 33)
         increaseColor(blue_pin, 66)
         decreaseColor(green_pin, 33)
         increaseColor(red_pin, 200)
 
     while current_time - start_time < 15:
-        blink3
-        blink()
-        blink2()
+        blink3()
+        blink3()
+        blink3()
         current_time = time.time()
         time.sleep(default_sleep)
     reset_light()
