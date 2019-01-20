@@ -62,7 +62,31 @@ def rainbow():
             pi.set_PWM_dutycycle(red_pin, brightness)
             pi.set_PWM_dutycycle(blue_pin, brightness)
 
+    def increaseColor(color, expected_brightness):
+        starting_brightness = pi.get_PWM_dutycycle(color)
+        while starting_brightness < expected_brightness:
+            starting_brightness += 1
+            pi.set_PWM_dutycycle(color, starting_brightness)
+            time.sleep(default_sleep)
+
+    def decreaseColor(color, expected_brightness):
+        starting_brightness = pi.get_PWM_dutycycle(color)
+        while starting_brightness > expected_brightness:
+            starting_brightness -= 1
+            pi.set_PWM_dutycycle(color, starting_brightness)
+            time.sleep(default_sleep)
+
+    def blink3():
+        reset_light()
+        increaseColor(red_pin, 100)
+        increaseColor(green_pin, 100)
+        decreaseColor(red_pin, 40)
+        increaseColor(blue_pin, 66)
+        decreaseColor(green_pin, 33)
+        increaseColor(red_pin, 200)
+
     while current_time - start_time < 15:
+        blink3
         blink()
         blink2()
         current_time = time.time()
