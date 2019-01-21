@@ -7,10 +7,11 @@ def switch_lights():
     blue_pin = 24
 
     pi = pigpio.pi()
-    print(pi.set_mode(red_pin, pigpio.OUTPUT))
 
     def get_brightness():
+        pi.get_PWM_range(red_pin)
         brightness_blue = pi.get_PWM_dutycycle(red_pin)
+        print(brightness_blue)
         return brightness_blue
 
     def switch_on():
