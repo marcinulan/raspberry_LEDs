@@ -24,7 +24,7 @@ def switch_lights():
         pi.set_PWM_dutycycle(blue_pin, 0)
         pi.set_PWM_dutycycle(green_pin, 0)
 
-    if get_brightness() > 255:
+    if get_brightness() > 100:
         is_light = 1
         print("{} and {}".format(get_brightness(), is_light))
     else:
