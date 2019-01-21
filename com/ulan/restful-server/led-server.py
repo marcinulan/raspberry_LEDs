@@ -1,3 +1,6 @@
+import time
+
+import pigpio
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from lib import glowgreen
@@ -16,7 +19,18 @@ api = Api(app)
 glowing = 0
 flashing = 0
 error_message = '404 - Raspberry Pi not found'
+red_pin = 17
+green_pin = 22
+blue_pin = 24
 
+pi = pigpio.pi()
+pi.set_PWM_dutycycle(red_pin, 255)
+pi.set_PWM_dutycycle(green_pin, 255)
+pi.set_PWM_dutycycle(blue_pin, 255)
+time.sleep(0.004)
+pi.set_PWM_dutycycle(red_pin, 0)
+pi.set_PWM_dutycycle(green_pin, 0)
+pi.set_PWM_dutycycle(blue_pin, 0)
 
 class GlowGreen(Resource):
     @staticmethod
