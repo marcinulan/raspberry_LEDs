@@ -6,7 +6,7 @@ def switch_lights():
     green_pin = 22
     blue_pin = 24
 
-    pi = pigpio.pi('192.168.1.31')
+    pi = pigpio.pi()
 
     def get_brightness():
         brightness_blue = pi.get_PWM_range(red_pin)
