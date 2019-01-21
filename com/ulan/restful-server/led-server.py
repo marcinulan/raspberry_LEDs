@@ -122,8 +122,7 @@ class CustomWhite(Resource):
             args = parser.parse_args()
             customwhite.switch_lights(args["level"])
             data = { "Status": "OK"}
-            json_string = json.dumps(data)
-            return json_string
+            return data
         except AttributeError:
             return error_message
 
