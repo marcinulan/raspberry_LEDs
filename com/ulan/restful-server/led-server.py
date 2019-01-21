@@ -13,6 +13,7 @@ from lib import blinkgreen
 from lib import greenlight
 from lib import redlight
 from lib import bluelight
+from lib import customcolor
 
 app = Flask(__name__)
 api = Api(app)
@@ -127,11 +128,25 @@ class CustomWhite(Resource):
             return error_message
 
 
+class CustomColor(Resource):
+    @staticmethod
+    def post():
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument("level")
+            args = parser.parse_args()
+            customcolor.switch_lights(args["level_red"], args["level_green"], args["level_blue"])
+            data = { "Status": "OK"}
+            return data
+        except AttributeError:
+            return error_message
+
 api.add_resource(GlowGreen, '/GlowGreen')
 api.add_resource(FlashRed, '/FlashRed')
 api.add_resource(Rainbow, '/Rainbow')
 api.add_resource(Daylight, '/SwitchLights')
 api.add_resource(CustomWhite, '/CustomWhite')
+api.add_resource(CustomColor, '/CustomColor')
 api.add_resource(Notifier, '/Notify')
 api.add_resource(GreenLight, '/Green')
 api.add_resource(RedLight, '/Red')
