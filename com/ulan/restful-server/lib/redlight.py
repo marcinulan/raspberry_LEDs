@@ -10,6 +10,7 @@ def switch_lights():
 
     def get_brightness():
         brightness_blue = pi.get_PWM_range(red_pin)
+        print(brightness_blue)
         return brightness_blue
 
     def switch_on():
