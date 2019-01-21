@@ -6,14 +6,11 @@ def switch_lights():
     green_pin = 22
     blue_pin = 24
 
-    pi = pigpio.pi()
+    pi = pigpio.pi('192.168.1.31')
 
-    try:
-        def get_brightness():
-            brightness_blue = pi.get_PWM_dutycycle(red_pin)
-            return brightness_blue
-    except pigpio.error:
-        print('elo')
+    def get_brightness():
+        brightness_blue = pi.get_PWM_range(red_pin)
+        return brightness_blue
 
     def switch_on():
         pi.set_PWM_dutycycle(red_pin, 250)
