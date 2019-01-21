@@ -52,6 +52,10 @@ def switch_lights(level_red, level_green, level_blue):
 
 
 def validate_level(level):
+    """
+
+    :type level: int
+    """
     if level > 255:
         return 255
     else:
