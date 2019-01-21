@@ -1,12 +1,13 @@
 import time
-
 import pigpio
 
 
-def switch_lights():
+def switch_lights(level):
     red_pin = 17
     green_pin = 22
     blue_pin = 24
+
+    level_int = int(level)
 
     default_sleep = 0.0001
 
@@ -30,40 +31,33 @@ def switch_lights():
         is_light = 0
         print("{} and {}".format(get_lights(), is_light))
 
-    def switch_off():
-        b, g, r = get_brightness()
-        while b > 0:
-            b -= 1
-            pi.set_PWM_dutycycle(blue_pin, b)
-            time.sleep(default_sleep)
-        while g > 0:
-            g -= 1
-            pi.set_PWM_dutycycle(green_pin, g)
-            time.sleep(default_sleep)
-
-        while r > 0:
-            r -= 1
-            pi.set_PWM_dutycycle(red_pin, r)
-            time.sleep(default_sleep)
+    if level_int > 255:
+        level_int = 255
+    else:
+        if level_int < 0:
+            level_int = 0
 
     def switch_on():
         b, g, r = get_brightness()
-        while b < 200:
+        while b < level_int:
             b += 1
             pi.set_PWM_dutycycle(blue_pin, b)
             time.sleep(default_sleep)
-        while g < 200:
+        while g < level_int:
             g += 1
             pi.set_PWM_dutycycle(green_pin, g)
             time.sleep(default_sleep)
-        while r < 255:
+        while r < level_int:
             r += 1
             pi.set_PWM_dutycycle(red_pin, r)
             time.sleep(default_sleep)
 
-    if is_light:
-        switch_off()
-    else:
-        switch_on()
+    def reset_light():
+        pi.set_PWM_dutycycle(red_pin, 0)
+        pi.set_PWM_dutycycle(green_pin, 0)
+        pi.set_PWM_dutycycle(blue_pin, 0)
+
+    reset_light()
+    switch_on()
 
     pi.stop()
