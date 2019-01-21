@@ -3,6 +3,7 @@ import time
 import pigpio
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
+import json
 from lib import glowgreen
 from lib import flashred
 from lib import rainbow
@@ -120,7 +121,9 @@ class CustomWhite(Resource):
             parser.add_argument("level")
             args = parser.parse_args()
             customwhite.switch_lights(args["level"])
-            return 200
+            data = { "Status": "OK"}
+            json_string = json.dumps(data)
+            return json_string
         except AttributeError:
             return error_message
 
