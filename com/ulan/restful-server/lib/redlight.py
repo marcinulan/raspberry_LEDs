@@ -9,7 +9,8 @@ def switch_lights():
     pi = pigpio.pi()
 
     def get_brightness():
-        brightness_blue = pi.get_PWM_range(red_pin)
+        pi.get_PWM_range(red_pin)
+        brightness_blue = pi.get_PWM_dutycycle(red_pin)
         print(brightness_blue)
         return brightness_blue
 
