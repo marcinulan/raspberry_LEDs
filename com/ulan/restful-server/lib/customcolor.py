@@ -21,9 +21,9 @@ def switch_lights(level_red, level_green, level_blue):
         brightness_blue = pi.get_PWM_dutycycle(blue_pin)
         return brightness_blue, brightness_green, brightness_red
 
-    level_red_int = validate_level(level_red_int)
-    level_green_int = validate_level(level_green_int)
-    level_blue_int = validate_level(level_blue_int)
+    # level_red_int = validate_level(level_red_int)
+    # level_green_int = validate_level(level_green_int)
+    # level_blue_int = validate_level(level_blue_int)
 
     def switch_on():
         b, g, r = get_brightness()
@@ -51,13 +51,9 @@ def switch_lights(level_red, level_green, level_blue):
     pi.stop()
 
 
-def validate_level(level):
-    """
-
-    :type level: int
-    """
-    if level > 255:
-        return 255
-    else:
-        if level < 0:
-            return 0
+# def validate_level(level):
+#     if level > 255:
+#         return 255
+#     else:
+#         if level < 0:
+#             return 0
