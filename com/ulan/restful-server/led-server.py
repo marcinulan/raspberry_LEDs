@@ -133,7 +133,7 @@ class CustomColor(Resource):
     def post():
         try:
             parser = reqparse.RequestParser()
-            parser.add_argument("level")
+            parser.add_argument("level_red", "level_green", "level_blue")
             args = parser.parse_args()
             customcolor.switch_lights(args["level_red"], args["level_green"], args["level_blue"])
             data = { "Status": "OK"}
