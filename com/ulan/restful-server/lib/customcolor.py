@@ -7,9 +7,20 @@ def switch_lights(level_red, level_green, level_blue):
     green_pin = 22
     blue_pin = 24
 
-    level_red_int = int(level_red)
-    level_green_int = int(level_green)
-    level_blue_int = int(level_blue)
+    try:
+        level_red_int = int(level_red)
+    except TypeError:
+        level_red_int = 0
+
+    try:
+        level_green_int = int(level_green)
+    except TypeError:
+        level_green_int = 0
+
+    try:
+        level_blue_int = int(level_blue)
+    except TypeError:
+        level_blue_int = 0
 
     default_sleep = 0.0001
 
