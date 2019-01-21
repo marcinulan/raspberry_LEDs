@@ -6,7 +6,7 @@ def switch_lights():
     green_pin = 22
     blue_pin = 24
 
-    pi = pigpio.pi('192.168.1.31')
+    pi = pigpio.pi()
 
     try:
         def get_brightness():

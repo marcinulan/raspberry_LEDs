@@ -11,7 +11,7 @@ def switch_lights(level):
 
     default_sleep = 0.0001
 
-    pi = pigpio.pi()
+    pi = pigpio.pi('192.168.1.31')
 
     def get_brightness():
         brightness_red = pi.get_PWM_dutycycle(red_pin)
